@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+.body{
+   background: rgba(255, 255, 255, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.btn{
+    background: rgba(84, 28, 156, 1);
+    color: #FFFFFF;
+  
+}
+ .title{
+    color: rgba(104, 0, 153, 1);
+    width: 1,740px;
+    font-family: Red Hat Text;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 48px;
+    line-height: 100%;
+    letter-spacing: 1.5%;
+ }
+ 
+ .random{
+    background: linear-gradient(90deg, #4BA1EB 0%, #936FE0 100%);
+    width: 5519.00927734375;
+    height: 1321;
+    top: 10px;
+    left: 411.52px;
+    border-radius: 137.18px;
+    angle: 0 deg;
+    opacity: 1;
+    font-family: Poppins;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 30px;
+    leading-trim: NONE;
+    line-height: auto;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    text-transform: capitalize;
+    color: rgba(255, 255, 255, 1);
+
+ }
+.footer-bg{
+background: rgba(50, 30, 93, 1);
+
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+ .footer{
+   color: rgba(94, 98, 130, 1);
+     font-family: Poppins;
+   font-weight: 600;
+   font-style: SemiBold;
+   font-size: 20px;
+   leading-trim: NONE;
+   line-height: 100%;
+   letter-spacing: 0%;
+   vertical-align: middle;
+ }
+ .footer-content{
+   color: rgba(94, 98, 130, 1);
+   font-family: Poppins;
+   font-weight: 400;
+   font-style: Regular;
+   font-size: 16px;
+   leading-trim: NONE;
+   line-height: 125%;
+   letter-spacing: 0%;
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+ }

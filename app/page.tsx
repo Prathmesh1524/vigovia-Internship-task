@@ -1,9 +1,7 @@
+"use client"
 
+import { ItineraryGenerator } from "./components/itineary/itinery-generator"
 
-export default function Home() {
-  return (
-        <>
-    
-    </>
-  );
+export default function HomePage() {
+  return <ItineraryGenerator />
 }
