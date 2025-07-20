@@ -1,13 +1,11 @@
 "use client"
-import Image from "next/image"
 import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../ui/Card"
+import { Card, CardContent } from "../../ui/Card"
 import { Button } from "@/app/ui/button"
 import { Label } from "../../ui/lable"
-import { DollarSign } from "lucide-react"
-import { generatePDF } from "../../lib/pdf-Generator"
+import { PDFDownloadLink } from "@react-pdf/renderer"
+import ItineraryPDF from "../itineary/ItenaryPDF"
 import type { IternaryDetails, Day } from "../../types/itinery"
-
 
 interface GeneratePDFSectionProps {
   tripDetails: IternaryDetails
@@ -15,47 +13,34 @@ interface GeneratePDFSectionProps {
 }
 
 export function GeneratePDFSection({ tripDetails, days }: GeneratePDFSectionProps) {
-  const [isGenerating, setIsGenerating] = useState(false)
-
-  const handleGeneratePDF = async () => {
-    setIsGenerating(true)
-    try {
-      await generatePDF(tripDetails, days)
-    } catch (error) {
-      console.error("Error generating PDF:", error)
-    } finally {
-      setIsGenerating(false)
-    }
-  }
-
   return (
     <>
-     <div className="flex justify-center items-center body p-6 random ">
-    <div>
-              <p >Hii, {tripDetails.ClientName || "Name"}!</p>
-              <p className="font-bold">{tripDetails.destination || "destination"}  Itinerary</p>
-              <p className="">{tripDetails.noOfdays} days</p>
-    </div>
-            </div>
+      <div className="flex justify-center items-center body p-6 random ">
+        <div>
+          <p>Hii, {tripDetails.ClientName || "Name"}!</p>
+          <p className="font-bold">{tripDetails.destination || "destination"} Itinerary</p>
+          <p className="">{tripDetails.noOfdays} days</p>
+        </div>
+      </div>
+
       <Card>
-      
         <CardContent className="space-y-4 p-6">
-           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label className="text-sm font-medium">Trip Title</Label>
               <p className="text-sm text-gray-600">{tripDetails.title || "Not specified"}</p>
             </div>
-           
+
             <div className="space-y-2">
               <Label className="text-sm font-medium">Duration</Label>
               <p className="text-sm text-gray-600">{tripDetails.noOfdays} days</p>
             </div>
+
             <div className="space-y-2">
               <Label className="text-sm font-medium">Travelers</Label>
               <p className="text-sm text-gray-600">{tripDetails.travelers} people</p>
             </div>
-          
+
             <div className="space-y-2">
               <Label className="text-sm font-medium">Budget</Label>
               <p className="text-sm text-gray-600">Rs {tripDetails.TotalBudget}</p>
@@ -76,18 +61,29 @@ export function GeneratePDFSection({ tripDetails, days }: GeneratePDFSectionProp
             </div>
           </div>
         </CardContent>
-      </Card> 
-      <div className="flex flex-col justify-center items-center pt-5 title ">
+      </Card>
 
+      <div className="flex flex-col justify-center items-center pt-5 title">
         PLAN.PACK.GO!
-        </div>
+      </div>
 
-      <div className="flex justify-center">
-       
-
-        <Button onClick={handleGeneratePDF} size="lg" className="px-8 py-3 text-lg btn hover:cursor-pointer rounded-3xl " disabled={isGenerating}>
-          {isGenerating ? "Generating PDF..." : "Generate Itinerary "}
-        </Button>
+      <div className="flex justify-center mt-4">
+        <PDFDownloadLink
+          document={<ItineraryPDF tripDetails={tripDetails} days={days} />}
+          fileName="travel-itinerary.pdf"
+        >
+          {({ loading }) =>
+            loading ? (
+              <Button size="lg" className="px-8 py-3 text-lg btn rounded-3xl" disabled>
+                Preparing PDF...
+              </Button>
+            ) : (
+              <Button size="lg" className="px-8 py-3 text-lg btn hover:cursor-pointer rounded-3xl">
+                Download Itinerary
+              </Button>
+            )
+          }
+        </PDFDownloadLink>
       </div>
     </>
   )

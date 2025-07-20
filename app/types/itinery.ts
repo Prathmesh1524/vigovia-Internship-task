@@ -40,7 +40,8 @@
         activities: Activity[],
         transfers: Transfer[],
         flight: Flights[],
-        notes: string
+        notes: string,
+        imgUrl : string
     }
 
     export  interface IternaryDetails{
